@@ -20,6 +20,7 @@ This service provides a complete solution for issuing, tracking, and redeeming d
 - **Persistent Storage:** SQLite database managed with Prisma ORM.
 - **Automated Testing:** Includes flow, stress, and authentication tests.
 - **API Documentation:** OpenAPI-style docs for all endpoints.
+- **Security:** JWT and rate limiting
 
 ## Architecture
 
@@ -160,12 +161,3 @@ curl -X POST http://localhost:3000/admin/redeem \
   -H "Content-Type: application/json" \
   -d '{ "qrCode": "ENT_1234567890_abc123", "latitude": 1.3521, "longitude": 103.8198 }'
 ```
-
-## Production Readiness
-
-- **Security:** JWT, input validation, rate limiting
-- **Reliability:** Error handling, transaction safety
-- **Scalability:** Modular, clean architecture
-- **Monitoring:** Health checks, structured logging
-- **Testing:** Full flow and edge case coverage
-- **Documentation:** Complete API and database docs
