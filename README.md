@@ -1,6 +1,6 @@
 # Entitlement Service
 
-A production-ready REST API for managing digital entitlements such as rewards, coupons, and tickets, with advanced time and location-based redemption rules.
+The service is designed with production best practices in mind, including JWT authentication, rate limiting, input validation, and comprehensive testing. While it demonstrates a production-ready architecture and covers many core requirements, further enhancements would be needed for a real-world deployment, such as advanced security hardening, operational monitoring, and compliance measures.
 
 ## Overview
 
