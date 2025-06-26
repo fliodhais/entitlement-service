@@ -43,8 +43,8 @@ declare -a test_locations=(
 )
 
 for location in "${test_locations[@]}"; do
-  IFS=',' read -r lat lng expected_dist description <<< "$location"
-  
+  IFS=',' read -r lat lng expected_dist description <<<"$location"
+
   # Create new entitlement for each test
   QR_CODE=$(curl -s -X POST $BASE_URL/admin/entitlement-instances \
     -H "Content-Type: application/json" \
@@ -53,10 +53,10 @@ for location in "${test_locations[@]}"; do
       "userId": "'$USER_ID'",
       "entitlementTypeId": "'$PRECISION_TYPE'"
     }' | jq -r '.qrCode')
-  
+
   echo -e "\n🎯 Testing: $description (Expected: ${expected_dist}m)"
   echo "   Location: $lat, $lng"
-  
+
   RESULT=$(curl -s -X POST $BASE_URL/admin/redeem \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $ADMIN_TOKEN" \
@@ -65,7 +65,7 @@ for location in "${test_locations[@]}"; do
       "latitude": '$lat',
       "longitude": '$lng'
     }')
-  
+
   echo "   Result: $(echo $RESULT | jq -c '.')"
 done
 

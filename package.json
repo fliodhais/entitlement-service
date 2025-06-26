@@ -15,7 +15,7 @@
 	"scripts": {
 		"dev": "bun --watch index.ts",
 		"start": "bun index.ts",
-		"test": "bash test.sh && bash stress-test.sh && bash auth-test.sh",
+		"test": "bash scripts/tests/test.sh && bash scripts/tests/stress-test.sh && bash scripts/tests/auth-test.sh",
 		"seed": "bun seed.ts",
 		"reset": "bash reset-db.sh",
 		"format": "prettier --write . --cache"
