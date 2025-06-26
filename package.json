@@ -1,0 +1,39 @@
+{
+	"name": "proj-entitlement-service",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"@types/bcryptjs": "^3.0.0",
+		"@types/bun": "latest",
+		"@types/express": "^5.0.3",
+		"@types/jsonwebtoken": "^9.0.10",
+		"@types/node": "^24.0.3",
+		"eslint": "^9.29.0",
+		"prettier": "^3.5.3"
+	},
+	"scripts": {
+		"dev": "bun --watch index.ts",
+		"start": "bun index.ts",
+		"test": "bash test.sh && bash stress-test.sh && bash auth-test.sh",
+		"seed": "bun seed.ts",
+		"reset": "bash reset-db.sh",
+		"format": "prettier --write . --cache"
+	},
+	"peerDependencies": {
+		"typescript": "^5.8.3"
+	},
+	"dependencies": {
+		"@prisma/client": "^6.9.0",
+		"@types/swagger-jsdoc": "^6.0.4",
+		"@types/swagger-ui-express": "^4.1.8",
+		"bcryptjs": "^3.0.2",
+		"express": "^5.1.0",
+		"express-rate-limit": "^7.5.0",
+		"geolib": "^3.3.4",
+		"jsonwebtoken": "^9.0.2",
+		"prisma": "^6.9.0",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.1"
+	}
+}

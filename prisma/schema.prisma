@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id          String @id @default(cuid())
+  email       String @unique
+  name        String
+  role        String @default("USER") // USER, ADMIN
+  createdAt   DateTime @default(now())
+  
+  entitlements EntitlementInstance[]
+}
+
+model EntitlementType {
+  id              String @id @default(cuid())
+  name            String
+  description     String?
+  redemptionRules String? // JSON: {"timeWindows": [...], "locations": [...]}
+  isActive        Boolean @default(true)
+  createdAt       DateTime @default(now())
+  createdBy       String // Admin user ID who created this type
+  
+  instances       EntitlementInstance[]
+}
+
+model EntitlementInstance {
+  id                String @id @default(cuid())
+  userId            String
+  entitlementTypeId String
+  status            String @default("ACTIVE") // ACTIVE, REDEEMED, EXPIRED
+  qrCode            String @unique // Generated unique code for QR
+  issuedAt          DateTime @default(now())
+  expiresAt         DateTime?
+  
+  user              User @relation(fields: [userId], references: [id])
+  entitlementType   EntitlementType @relation(fields: [entitlementTypeId], references: [id])
+  redemption        Redemption?
+}
+
+model Redemption {
+  id                    String @id @default(cuid())
+  entitlementInstanceId String @unique // Prevents duplicate redemptions
+  redeemedAt            DateTime @default(now())
+  redeemedBy            String // Admin user ID who performed redemption
+  latitude              Float? // Location where redemption occurred
+  longitude             Float?
+  
+  entitlementInstance   EntitlementInstance @relation(fields: [entitlementInstanceId], references: [id])
+}
